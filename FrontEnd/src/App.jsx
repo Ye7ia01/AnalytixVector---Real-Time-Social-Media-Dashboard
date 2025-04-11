@@ -1,23 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router";
+import Header from "./Components/Header/Header";
+import Layout from "./Components/Layout/Layout";
+import Home from "./Components/Home/Home";
+import "./Styles/tailwind.css";
+import Builting from "./Components/Home/Builting";
+import Login from "./Components/Login/Login";
+import CallbackPage from "./Components/Home/CallbackPage";
+import ManageTeam from "./Components/Teams/ManageTeam";
+
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-  const FB_APP_ID = '682817207539712'
-  const REDIRECT_URI = 'https://www.facebook.com/connect/login_success.html'
-  const facebookLoginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${FB_APP_ID}&redirect_uri=${REDIRECT_URI}&scope=instagram_basic,instagram_manage_insights,pages_show_list&response_type=code`;
-
-  const handleLogin = () => {
-    window.location.href = facebookLoginUrl;
-  }
-
   return (
     <>
-      <button onClick={handleLogin}>Login with Facebook</button>
+      <Routes>
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route index element={<Home />} />}
+        />
+        <Route
+          path="/auth/callback"
+          children={<Route index element={<CallbackPage />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="login" element={<Login />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="tasks" element={<Header />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="team" element={<ManageTeam />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="messages" element={<Builting />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="Statistics" element={<Builting />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="Tracking" element={<Builting />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="Settings" element={<Builting />} />}
+        />
+        <Route
+          path="/"
+          element={<Layout />}
+          children={<Route path="/Support" element={<Home />} />}
+        />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
